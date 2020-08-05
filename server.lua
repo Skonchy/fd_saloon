@@ -31,6 +31,7 @@ AddEventHandler("fd_saloon:CheckOnDuty", function()
         local identifier = user.getIdentifier()
         print("checking on duty")
         if user.getJob() == "saloon" then
+            print("yer a bitch")
             TriggerClientEvent("fd_saloon:UpdateOnDuty",src,true)
         else
             TriggerClientEvent("fd_saloon:UpdateOnDuty",src,false)
@@ -45,6 +46,7 @@ RegisterCommand("openSaloon", function(src,args,raw)
         local ident = user.getIdentifier()
         MySQL.Async.fetchAll("SELECT * FROM saloons WHERE owner = @owner",{owner = ident},function(result)
             if result[1] ~= nil then
+                print("update on duty")
                 TriggerClientEvent("fd_saloon:UpdateOnDuty",src,true)
                 TriggerClientEvent("chat:addMessage", src, {
                     color = {255,0,0},

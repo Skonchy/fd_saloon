@@ -35,7 +35,7 @@ function IsPlayerNearCoords(x, y, z)
     local playerx, playery, playerz = table.unpack(GetEntityCoords(GetPlayerPed(), 0))
     local distance = GetDistanceBetweenCoords(playerx, playery, playerz, x, y, z, true)
 
-    if distance < 0.5 then
+    if distance < 0.75 then
         return true
     end
 end

@@ -60,13 +60,13 @@ end
 function getTargetObject()
     local pos = GetEntityCoords(PlayerPedId())
     local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 1.0, 0.0)
-    local result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bowl04x_stew"),true,false,true)
+    local result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bowl04x_stew"),false,false,true)
     local type = "food"
     if result == 0 then
-        result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bottleBeer01x"),true,false,true)
+        result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bottleBeer01x"),false,false,true)
         type = "beer"
         if result == 0 then
-            result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bottlenavyrum01X"),true,false,true)
+            result = GetClosestObjectOfType(entityWorld.x,entityWorld.y,entityWorld.z,1.5,GetHashKey("p_bottlenavyrum01X"),false,false,true)
             type = "liquor"
         end
     end
@@ -84,6 +84,11 @@ Citizen.CreateThread(function()
         local object,type = getTargetObject()
         if object ~= 0 then
             if IsControlJustPressed(1,0x760A9C6F) then -- pressed g
+                NetworkRequestControlOfEntity(object)
+                while not NetworkHasControlOfEntity(object) do
+                    print("gib object")
+                    Citizen.Wait(10)
+                end
                 DeleteEntity(object)
                 print(type)
                 TriggerServerEvent("fd_saloon:AddToInv",type)
@@ -101,11 +106,14 @@ Citizen.CreateThread(function()
         if onDuty then
             if WarMenu.IsMenuOpened('saloon') then
                 if WarMenu.Button("Serve Food") then
-                    spawnFood()
+                    --spawnFood()
+                    TriggerServerEvent("fd_saloon:AddToInv","food")
                 elseif WarMenu.Button("Serve Beer") then
-                    spawnBeer()
+                    --spawnBeer()
+                    TriggerServerEvent("fd_saloon:AddToInv","beer")
                 elseif WarMenu.Button("Serve Liquor") then
-                    spawnLiquor()
+                    --spawnLiquor()
+                    TriggerServerEvent("fd_saloon:AddToInv","liquor")
                 elseif WarMenu.Button("Close") then
                     WarMenu.CloseMenu('saloon')
                 end
@@ -121,7 +129,4 @@ Citizen.CreateThread(function()
     end
 end)
 
--- commands -- 
-RegisterCommand("outfits", function(src,args,raw)
-    TriggerEvent("redmerp_clothing:OpenOutfits")
-end)
+-- commands --
