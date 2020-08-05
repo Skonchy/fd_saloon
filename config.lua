@@ -10,3 +10,9 @@ SaloonConfig.PianoSpots = {
     vector3(1346.95, -1371.76, 80.49)
 
 }
+
+--SaloonConfig.bathtext = 'Press (ENTER) to take a Bath'
+
+SaloonConfig.BathSpots = {
+    vector3(2628.59,-1223.18,59.59),
+}
