@@ -69,20 +69,19 @@ Citizen.CreateThread(function()
 
                     SetEntityCoords(player,  2629.49, -1223.63, 59.62, true, true, true, false)
                     SetEntityHeading(PlayerPedId(), 354.25)
-                        local dict = "mini_games@bathing@regular@arthur"
-                        RequestAnimDict(dict)
-                            while not HasAnimDictLoaded(dict) do
-                                Citizen.Wait(0)
-                            end
-						local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, -0.5, 0.0)					
-						SetEntityCoords(player,  entityWorld.x,entityWorld.y,entityWorld.z, true, true, true, false)
-                        TaskPlayAnim(player, dict, "bathing_idle_02", 1.0, 8.0, -1, 1, 0, false, false, false)
-                            Citizen.Wait(5000)  
-                        TaskPlayAnim(player, dict, "left_leg_scrub_medium", 1.0, 8.0, -1, 1, 0, false, false, false) 
-						 Citizen.Wait(2000)
-                        TaskPlayAnim(player, dict, "bathing_idle_01", 1.0, 8.0, -1, 1, 0, false, false, false)
-                            Citizen.Wait(5000)
-                        
+                    local dict = "mini_games@bathing@regular@arthur"
+                    RequestAnimDict(dict)
+                    while not HasAnimDictLoaded(dict) do
+                        Citizen.Wait(0)
+                    end
+                    local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, -0.5, 0.0)					
+                    SetEntityCoords(player,  entityWorld.x,entityWorld.y,entityWorld.z, true, true, true, false)
+                    TaskPlayAnim(player, dict, "bathing_idle_02", 1.0, 8.0, -1, 1, 0, false, false, false)
+                        Citizen.Wait(5000)  
+                    TaskPlayAnim(player, dict, "left_leg_scrub_medium", 1.0, 8.0, -1, 1, 0, false, false, false) 
+                        Citizen.Wait(2000)
+                    TaskPlayAnim(player, dict, "bathing_idle_01", 1.0, 8.0, -1, 1, 0, false, false, false)
+                        Citizen.Wait(5000)
             end
 					
 			if IsControlJustPressed(0, keys['G']) then

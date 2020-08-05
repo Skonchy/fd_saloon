@@ -11,7 +11,8 @@ shared_script "config.lua"
 client_scripts {
     "client/client.lua",
     "client/piano.lua",
-    "client/warmenu.lua"
+    "client/warmenu.lua",
+    "client/baths.lua"
 }
 
 server_scripts {
